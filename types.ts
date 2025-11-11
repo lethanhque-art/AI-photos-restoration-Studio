@@ -1,3 +1,5 @@
+// FIX: Import React to resolve 'React' namespace for ComponentType.
+import type React from 'react';
 
 export interface RestoreSettings {
     colorize: boolean;
@@ -8,6 +10,7 @@ export interface RestoreSettings {
     sharpenWrinkles: boolean;
     isVietnamese: boolean;
     redrawClothing: boolean;
+    sharpen: boolean;
     gender: 'Automatic' | 'Male' | 'Female';
     age: 'Automatic' | 'Child' | 'Young Adult' | 'Adult' | 'Senior';
     smile: 'Automatic' | 'Add Smile' | 'Neutral';

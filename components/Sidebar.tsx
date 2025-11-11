@@ -8,7 +8,7 @@ import {
 
 const mainNavItems: NavItem[] = [
     { icon: UserIcon, label: 'Chỉnh Sửa Ảnh Thẻ' },
-    { icon: RestoreIcon, label: 'Phục Chế Ảnh Cũ', active: true },
+    { icon: RestoreIcon, label: 'Phục Chế Ảnh Cũ' },
     { icon: FilterIcon, label: 'Bộ Lọc Hình Ảnh' },
     { icon: CameraIcon, label: 'Ảnh Cưới AI' },
     { icon: SparklesIcon, label: 'Làm Nét Ảnh' },
@@ -26,17 +26,22 @@ const secondaryNavItems: NavItem[] = [
     { icon: MessageCircleIcon, label: 'Tham gia nhóm Zalo' },
 ];
 
+interface SidebarNavItemProps {
+    item: NavItem;
+    isActive: boolean;
+    onClick: () => void;
+}
 
-const SidebarNavItem: React.FC<{ item: NavItem }> = ({ item }) => {
+const SidebarNavItem: React.FC<SidebarNavItemProps> = ({ item, isActive, onClick }) => {
     const Icon = item.icon;
     const itemClasses = `flex items-center p-3 rounded-lg cursor-pointer transition-colors duration-200 ${
-        item.active 
+        isActive
         ? 'bg-blue-600 text-white' 
         : 'text-gray-300 hover:bg-gray-700'
     }`;
     return (
         <li>
-            <a href="#" className={itemClasses}>
+            <a href="#" onClick={(e) => { e.preventDefault(); onClick(); }} className={itemClasses}>
                 <Icon className="w-5 h-5 mr-3" />
                 <span className="font-medium text-sm">{item.label}</span>
             </a>
@@ -44,7 +49,12 @@ const SidebarNavItem: React.FC<{ item: NavItem }> = ({ item }) => {
     );
 };
 
-export const Sidebar: React.FC = () => {
+interface SidebarProps {
+    activeFeature: string;
+    setActiveFeature: (feature: string) => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ activeFeature, setActiveFeature }) => {
     return (
         <aside className="w-full lg:w-64 bg-[#292d33] p-4 flex flex-col flex-shrink-0">
             <div className="flex items-center mb-6">
@@ -53,12 +63,12 @@ export const Sidebar: React.FC = () => {
             </div>
             <nav className="flex-grow">
                 <ul className="space-y-2">
-                    {mainNavItems.map((item) => <SidebarNavItem key={item.label} item={item} />)}
+                    {mainNavItems.map((item) => <SidebarNavItem key={item.label} item={item} isActive={item.label === activeFeature} onClick={() => setActiveFeature(item.label)} />)}
                 </ul>
             </nav>
             <div className="mt-auto">
                 <ul className="space-y-2 pt-4 border-t border-gray-700">
-                    {secondaryNavItems.map((item) => <SidebarNavItem key={item.label} item={item} />)}
+                    {secondaryNavItems.map((item) => <SidebarNavItem key={item.label} item={item} isActive={item.label === activeFeature} onClick={() => { /* Placeholder */ }} />)}
                 </ul>
                  <div className="flex items-center justify-between mt-4 p-3 rounded-lg bg-gray-700/50 cursor-pointer">
                     <div className="flex items-center">

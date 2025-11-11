@@ -1,4 +1,3 @@
-
 import React from 'react';
 import type { RestoreSettings } from '../types';
 
@@ -46,6 +45,7 @@ export const ControlsPanel: React.FC<ControlsPanelProps> = ({ settings, setSetti
                 <Checkbox label="Tô màu" checked={settings.colorize} onChange={c => setSettings(s => ({...s, colorize: c}))} />
                 <Checkbox label="Bám theo chi tiết khuôn mặt" checked={settings.stickToFaceDetails} onChange={c => setSettings(s => ({...s, stickToFaceDetails: c}))} />
                 <Checkbox label="Chất lượng cao" checked={settings.highQuality} onChange={c => setSettings(s => ({...s, highQuality: c}))} />
+                <Checkbox label="Làm nét" checked={settings.sharpen} onChange={c => setSettings(s => ({...s, sharpen: c}))} />
                 <Checkbox label="Làm nét nếp nhăn" checked={settings.sharpenWrinkles} onChange={c => setSettings(s => ({...s, sharpenWrinkles: c}))} />
                 <Checkbox label="Vẽ lại tóc chi tiết" checked={settings.redrawHair} onChange={c => setSettings(s => ({...s, redrawHair: c}))} />
                 <Checkbox label="Người Việt Nam" checked={settings.isVietnamese} onChange={c => setSettings(s => ({...s, isVietnamese: c}))} />
